@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="js/script.js"></script>
+        <link rel="stylesheet" href="css/style.css">
+        <title>Hopscotch File Size Fix</title>
+    
+    </head>
+    
+    <body>
+    
+        <h1>HopMop</h1> 
+        <p>A tool for cleaning up Hopscotch projects.</p>
+        
+        <hr>
+        <br>
+        <p>Upload a Hopscotch JSON file here.</p>
+        <input type="file" id="selectFiles" value="" />
+        <br><br>
+        <button id="import">Clean Up File</button>
+        <br>
+        <br>
+        
+        <hr>
+        
+        <p>Copy and paste the result into your original file:</p>
+        <textarea id="result"></textarea>
+        <hr>
+        
+        <p>Credit to <a href="http://forum.gethopscotch.com/u/thinbuffalo/">ThinBuffaloSr</a> for originally discovering and researching the file size bug and writing a Windows program for fixing it.</p>
+        
+        <script>
+        
+            document.getElementById("import").onclick = function() {
+
+                var files = document.getElementById("selectFiles").files;
+                
+                if (files.length <= 0) {
+                    return false;
+                }
+                
+                var fileRead = new FileReader();
+                
+                fileRead.onload = function(e) {
+                    
+                    var result = JSON.parse(e.target.result);
+                    console.log(result);
+                    
+                    cleanUpCode(result);
+
+                }
+                
+                fileRead.readAsText(files.item(0));
+            }   
+        
+        </script>
+        
+    </body>
+
+</html>
